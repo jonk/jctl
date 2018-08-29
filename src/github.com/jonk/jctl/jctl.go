@@ -5,6 +5,7 @@ import (
     "flag"
     "context"
     "log"
+    "time"
 
     "github.com/ericchiang/k8s"
     corev1 "github.com/ericchiang/k8s/apis/core/v1"
@@ -21,8 +22,10 @@ func main() {
     if err := client.List(context.Background(), "", &nodes); err != nil {
         log.Fatal(err)
     }
-
-    for _, node := range nodes.Items {
-        fmt.Printf("name=%q schedulable=%t\n", *node.Metadata.Name, !*node.Spec.Unschedulable)
+    for {
+        for _, node := range nodes.Items {
+            fmt.Printf("name=%q schedulable=%t\n", *node.Metadata.Name, !*node.Spec.Unschedulable)
+        }
+        time.Sleep(2 * time.Second)
     }
 }

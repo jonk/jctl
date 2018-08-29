@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jctl
+  labels:
+    app: jctl
+spec:
+  serviceAccountName: jctl
+  containers:
+  - name: jctl
+    image: docker.io/jonk1993/jctl:v0.0.1
